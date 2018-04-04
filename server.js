@@ -35,7 +35,6 @@ app.get('/api/saved', function(req, res){
         var urls = docs.map(function(x){
             return x.url;
         });
-console.log(urls);
         res.json(urls);
     });
 });
