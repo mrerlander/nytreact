@@ -82,7 +82,6 @@ render(){
             </Row>
             <Row>
                 {this.state.articles.map((article, i) => <SearchResults key={i} saved={(this.state.dbArticles.includes(article.web_url)) ? true : false} headline={article.headline.main} href={article.web_url} byline={article.byline.original} date={article.pub_date} type={article.type_of_material} snippet={article.snippet} handleSave={this.handleSave}/>)}
-    }
             </Row>
         </div>
     )

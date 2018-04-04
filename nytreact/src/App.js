@@ -10,11 +10,10 @@ const App = () => (
     <div>
       <Header />
       <Route exact path="/" component={Home} />
+      <Route exact path="/saved" component={Saved} />
     </div>
   </Router>
 
 );
 
 export default App;
-
-//<Route exact path='/saved' component={Saved} />

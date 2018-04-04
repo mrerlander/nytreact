@@ -19,6 +19,9 @@ export default {
         }).then(res => res.json);
     },
     getDBArticles: function(){
+        return axios.get('/api/savedurls');
+    },
+    getSavedArticles: function(){
         return axios.get('/api/saved');
     }
 };

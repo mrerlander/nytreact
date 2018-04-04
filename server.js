@@ -28,14 +28,20 @@ app.get('/api/articles', function (req, res) {
     });
 });
 
-app.get('/api/saved', function(req, res){
+app.get('/api/savedurls', function(req, res){
     
     db.articles.find({},function(err, docs){
 
-        var urls = docs.map(function(x){
-            return x.url;
+        var urls = docs.map(function(article){
+            return article.url;
         });
         res.json(urls);
+    });
+});
+
+app.get('/api/saved', function(req, res){
+    db.articles.find({}, function(err, docs){
+        res.json(docs);
     });
 });
 

@@ -10,7 +10,7 @@ const SearchForm = props => (
             <Input onChange={props.handleInputChange} placeholder='Start Year (Optional)' s={12} name='startDate' label='Start (YYYY)' />
             <Input onChange={props.handleInputChange} placeholder='End Year (Optional)' s={12} name='endDate' label='End (YYYY)'  />
             <Button type='submit' waves='light'>Search</Button>
-            <Button waves='light' className='right' disabled>
+            <Button waves='light' className='right'>
                 <Link to='/saved' className='white-text'>Saved Articles</Link>
             </Button>
         </Row>
