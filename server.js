@@ -20,7 +20,7 @@ db.on('error', function (error) {
     console.log('Database Error:', error);
 });
 
-app.get('/articles', function (req, res) {
+app.get('/api/articles', function (req, res) {
     db.articles.find({
         'saved': true
     }, function (error, articles) {
@@ -28,7 +28,19 @@ app.get('/articles', function (req, res) {
     });
 });
 
-app.post('/articles', function (req, res) {
+app.get('/api/saved', function(req, res){
+    
+    db.articles.find({},function(err, docs){
+
+        var urls = docs.map(function(x){
+            return x.url;
+        });
+console.log(urls);
+        res.json(urls);
+    });
+});
+
+app.post('/api/articles', function (req, res) {
     var url = req.body.url;
     var headline = req.body.headline;
     var snippet = req.body.snippet;
@@ -36,7 +48,7 @@ app.post('/articles', function (req, res) {
     var byline = req.body.byline;
     var type = req.body.type;
 
-    db.articles.insertOne({
+    db.articles.insert({
         headline: headline,
         byline: byline,
         date: date,
@@ -48,7 +60,7 @@ app.post('/articles', function (req, res) {
     });
 });
 
-app.delete('/articles', function (req, res) {
+app.delete('/api/articles', function (req, res) {
     var id = req.body.id;
 
     db.articles.remove({
