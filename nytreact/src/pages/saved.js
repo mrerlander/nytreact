@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import API from "../utils/API";
 import SavedResults from '../components/savedResults';
-import {Row} from 'react-materialize';
+import {Row, Col, CardPanel} from 'react-materialize';
 import Head from '../components/header';
 
 class Saved extends Component {
@@ -40,7 +40,7 @@ class Saved extends Component {
             <div>
             <Head />
             <Row>
-                {this.state.articles.map((article, i) => <SavedResults 
+            {(this.state.articles.length > 0) ? this.state.articles.map((article, i) => <SavedResults 
                     key={i} 
                     headline={article.headline} 
                     href={article.url} 
@@ -52,7 +52,16 @@ class Saved extends Component {
                     id={article._id} 
                     saveComment={this.saveComment} 
                     handleDelete={this.handleDelete}
-                    />)}
+                    />) :  <Col 
+                            s={10} 
+                            offset='s1'
+                           >
+                            <CardPanel 
+                                className="center teal lighten-1 black-text">
+                                <span>No articles to display</span>
+                            </CardPanel>
+                           </Col>  
+        }  
             </Row>
             </div>
         )

@@ -102,7 +102,8 @@ class Home extends Component {
                         <Link
                             to='/saved' 
                             className='white-text'>
-                                <Button 
+                                <Button
+                                    large 
                                     waves='light'>
                                     Saved Articles
                                 </Button>
