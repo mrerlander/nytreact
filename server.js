@@ -24,6 +24,7 @@ app.get('/api/articles', function (req, res) {
     db.articles.find({
         'saved': true
     }, function (error, articles) {
+        console.log(articles);
         res.json(articles);
     });
 });
@@ -62,6 +63,19 @@ app.post('/api/articles', function (req, res) {
         url: url
     }, function (error, savedArticle) {
         res.json(savedArticle);
+    });
+});
+
+app.put('/api/comment', function (req, res){
+    var id = req.body.id;
+    var comment = req.body.comment;
+
+    db.articles.findAndModify({
+        query: {"_id": mongojs.ObjectID(id)},
+        update: {$set: {"comment": comment}},
+        new: true
+    }, function(err, doc, lastErrorObject){
+        res.json(doc);
     });
 });
 
