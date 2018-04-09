@@ -3,8 +3,8 @@ import axios from 'axios';
 export default {
     getArticles: function (topic, startDate, endDate, key) {
 
-        const startDateVal = (startDate) ? '&begin-date=' + startDate + '0101' : '';
-        const endDateVal = (endDate) ? '&endDate=' + endDate + '1231' : '';
+        const startDateVal = (startDate) ? '&begin_date=' + startDate + '0101' : '';
+        const endDateVal = (endDate) ? '&end_date=' + endDate + '1231' : '';
 
         return axios.get(`https://api.nytimes.com/svc/search/v2/articlesearch.json?q=${topic}${startDateVal}${endDateVal}&api-key=${key}`);
     },

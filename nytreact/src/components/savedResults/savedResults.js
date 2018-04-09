@@ -21,13 +21,17 @@ const SavedResults = props => (
                         href={props.href}>
                         Article Link
                     </Button>, 
-                    <CommentModal 
-                        id={props.id} 
+                    <CommentModal
+                        id={props.id}modal
                         comment={props.comment} 
-                        saveComment={props.saveComment} 
-                        headline={props.headline}/>]}>
-                <p><strong>{props.byline}</strong> | <span>{props.date}</span> | <span>{props.type}</span></p>
-                <h6>{props.snippet}</h6>
+                        saveComment={props.saveComment}
+                        getSavedArticles={props.getSavedArticles}
+                        headline={props.headline}
+                        modalOpen={props.modalOpen}
+                    />
+                ]}>
+                    <p><strong>{props.byline}</strong> | <span>{props.date}</span> | <span>{props.type}</span></p>
+                    <h6>{props.snippet}</h6>
             </Card> 
         </Col>   
 );

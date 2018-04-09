@@ -35,6 +35,7 @@ class Home extends Component {
 
     searchArticles = (topic, startDate, endDate) => {
         const key = process.env.REACT_APP_NYT_KEY;
+        
         API.getArticles(topic, startDate, endDate, key)
         .then(res => this.setState({articles: res.data.response.docs}));
 

@@ -4,6 +4,8 @@ import SavedResults from '../components/savedResults';
 import {Row, Col, CardPanel} from 'react-materialize';
 import Head from '../components/header';
 
+const $ = window.$;
+
 class Saved extends Component {
     constructor() {
         super();
@@ -13,6 +15,10 @@ class Saved extends Component {
     };
 
     componentDidMount(){
+       this.getSavedArticles();
+    }
+
+    getSavedArticles = () => {
         API.getSavedArticles()
         .then(res => this.setState({articles: res.data}));
     }
@@ -22,7 +28,8 @@ class Saved extends Component {
        const comment = event.target.previousElementSibling.firstElementChild.value;
        const id = event.target.id;
        
-       API.saveComment(id, comment);
+       API.saveComment(id, comment)
+       .then(this.getSavedArticles());
    }
 
    handleDelete = event => {
@@ -33,6 +40,10 @@ class Saved extends Component {
        .then(API.getSavedArticles()
        .then(res => this.setState({articles: res.data}))
         )
+   }
+
+   modalOpen = (id, comment) => {
+       $(`#modal${id}`).modal('open');
    }
 
     render(){
@@ -52,6 +63,8 @@ class Saved extends Component {
                     id={article._id} 
                     saveComment={this.saveComment} 
                     handleDelete={this.handleDelete}
+                    getSavedArticles={this.getSavedArticles}
+                    modalOpen={this.modalOpen}
                     />) :  <Col 
                             s={10} 
                             offset='s1'
