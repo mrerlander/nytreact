@@ -29,6 +29,10 @@ app.get('/api/articles', function (req, res) {
     });
 });
 
+if (process.env.NODE_ENV === 'production') {
+    app.use(express.static('client/build'));
+  }
+
 app.get('/api/savedurls', function(req, res){
     
     db.articles.find({},function(err, docs){
