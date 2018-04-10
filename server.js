@@ -31,21 +31,28 @@ app.get('/api/articles', function (req, res) {
 
 if (process.env.NODE_ENV === 'production') {
     app.use(express.static('nytreact/build'));
-  }
+}
 
-app.get('/api/savedurls', function(req, res){
-    
-    db.articles.find({},function(err, docs){
+app.use(function (req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    res.header("Access-Control-Allow-Methods", "POST, GET, OPTIONS, PUT, DELETE");
+    next();
+});
 
-        var urls = docs.map(function(article){
+app.get('/api/savedurls', function (req, res) {
+
+    db.articles.find({}, function (err, docs) {
+
+        var urls = docs.map(function (article) {
             return article.url;
         });
         res.json(urls);
     });
 });
 
-app.get('/api/saved', function(req, res){
-    db.articles.find({}, function(err, docs){
+app.get('/api/saved', function (req, res) {
+    db.articles.find({}, function (err, docs) {
         res.json(docs);
     });
 });
@@ -70,15 +77,21 @@ app.post('/api/articles', function (req, res) {
     });
 });
 
-app.put('/api/comment', function (req, res){
+app.put('/api/comment', function (req, res) {
     var id = req.body.id;
     var comment = req.body.comment;
 
     db.articles.findAndModify({
-        query: {"_id": mongojs.ObjectID(id)},
-        update: {$set: {"comment": comment}},
+        query: {
+            "_id": mongojs.ObjectID(id)
+        },
+        update: {
+            $set: {
+                "comment": comment
+            }
+        },
         new: true
-    }, function(err, doc, lastErrorObject){
+    }, function (err, doc, lastErrorObject) {
         res.json(doc);
     });
 });
