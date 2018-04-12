@@ -20,15 +20,6 @@ db.on('error', function (error) {
     console.log('Database Error:', error);
 });
 
-app.get('/api/articles', function (req, res) {
-    db.articles.find({
-        'saved': true
-    }, function (error, articles) {
-        console.log(articles);
-        res.json(articles);
-    });
-});
-
 if (process.env.NODE_ENV === 'production') {
     app.use(express.static('nytreact/build'));
 }
@@ -38,6 +29,15 @@ app.use(function (req, res, next) {
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     res.header("Access-Control-Allow-Methods", "POST, GET, OPTIONS, PUT, DELETE");
     next();
+});
+
+app.get('/api/articles', function (req, res) {
+    db.articles.find({
+        'saved': true
+    }, function (error, articles) {
+        console.log(articles);
+        res.json(articles);
+    });
 });
 
 app.get('/api/savedurls', function (req, res) {
