@@ -4,12 +4,12 @@
   "description": "NYT article scraper using react",
   "main": "server.js",
   "dependencies": {
-    "body-parser": "^1.18.2",
-    "express": "^4.16.3",
-    "mongojs": "^2.5.0",
-    "morgan": "^1.9.0",
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "mongojs": "^3.0.0",
+    "morgan": "^1.9.1",
     "path": "^0.12.7",
-    "request": "^2.85.0"
+    "request": "^2.88.0"
   },
   "devDependencies": {},
   "scripts": {
